@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Users {
+  id        String      @id @default(uuid())
+  name      String
+  email     String      @unique
+  role      String      @default("user")
+  addedAt   DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  bookings  Bookings[]
+  favorites Favorites[]
+}
+
+model Cars {
+  id            String      @id @default(uuid())
+  name          String
+  image         String
+  price         Float
+  desc          String
+  brand         String
+  model         String
+  year          Int
+  manufacturer  String
+  status        String
+  color         String
+  type          String
+  engine        String
+  fuel          String
+  transmission  String
+  isFeatured    Boolean     @default(false)
+  date_of_entry DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  bookings      Bookings[]
+  favoritedBy   Favorites[]
+}
+
+model Bookings {
+  id        String @id @default(uuid())
+  date      String
+  time      String
+  status    String @default("pending")
+  userId    String
+  carId     String
+  startTime String
+  endTime   String
+  car       Cars   @relation(fields: [carId], references: [id], onDelete: Cascade)
+  user      Users  @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Favorites {
+  id     String @id @default(uuid())
+  userId String
+  carId  String
+  car    Cars   @relation(fields: [carId], references: [id], onDelete: Cascade)
+  user   Users  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, carId])
+}
