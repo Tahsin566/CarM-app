@@ -197,7 +197,8 @@ export async function addCars(formdata: CarsDataType, file: File) {
   if (!file) throw new Error("No file selected")
 
 
-  const { url } = await uploadFile(file) || ''
+  const url = (await uploadFile(file)).url || ''
+
 
   const existingCars = await prisma.cars.findFirst({
 
