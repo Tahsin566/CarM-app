@@ -4,7 +4,27 @@ import Link from 'next/link'
 import { title } from 'process'
 import React from 'react'
 
-const VehicleCard = ({ cars }: { cars: { id: string, name: string, price: number, image: string, year: number, type: string, fuel: string } }) => {
+interface CarType {
+  name: string
+  id: string
+  image: string
+  price: number
+  desc: string
+  brand: string
+  model: string
+  year: number
+  manufacturer: string
+  status: string
+  color: string
+  type: string
+  engine: string
+  fuel: string
+  transmission: string
+  isFeatured: boolean
+  date_of_entry: Date
+}
+
+const VehicleCard = ({ cars }: { cars: CarType }) => {
 
   return (
     <Link href={{

@@ -13,6 +13,25 @@ import Image from "next/image";
 import Link from "next/link";
 
 
+interface CarsType {
+  id: string
+  name: string
+  model: string
+  transmission: string
+  fuel: string
+  engine: string
+  type: string
+  color: string
+  image: string
+  status: string
+  year: number
+  price: number
+  desc: string
+  brand: string
+  manufacturer: string
+  isFeatured: boolean,
+  date_of_entry: Date
+}
 
 
 export default async function Home() {
@@ -36,7 +55,7 @@ export default async function Home() {
 
         <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {
-            featureCars.map((car, index) => index < 3 && <VehicleCard key={car.id} cars={car} />)
+            featureCars.map((car: CarsType, index) => index < 3 && <VehicleCard key={car.id} cars={car} />)
           }
         </div>
 
