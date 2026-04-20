@@ -55,7 +55,7 @@ export default async function Home() {
 
         <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {
-            featureCars.map((car: CarsType, index) => index < 3 && <VehicleCard key={car.id} cars={car} />)
+            featureCars.map((car: CarsType, index : number) => index < 3 && <VehicleCard key={car.id} cars={car} />)
           }
         </div>
 
